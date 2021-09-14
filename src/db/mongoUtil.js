@@ -29,8 +29,16 @@ class MongoUtil {
             await this.client.close();
         }
     }
+
+    async addCarToCarsCollection(carData){
+        try {
+            await this.client.connect();
+            const result = await this.client.db("descl-core").collection("Cars").insertOne(carData);
+            console.log(`New Car created with the following mongo id: ${result.insertedId}`);
+        } catch (e) {
+            console.error(e);
+        }
+    }
 }
 
-// Test Lines - Remove Later
-const mongoUtil = new MongoUtil();
-mongoUtil.listAllDatabases();
+export default MongoUtil;
