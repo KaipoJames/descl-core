@@ -3,7 +3,7 @@ const uuidHelper = new UUID();
 
 class Player {
     constructor(dt) {
-        this.id = uuidHelper.getUniqueId();
+        this.descl_id = uuidHelper.getUniqueId();
         this.name = dt.name;
         this.nicknames = dt.nicknames;
         this.weight = dt.weight;
