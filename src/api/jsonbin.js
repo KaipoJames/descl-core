@@ -2,6 +2,14 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
 
+/** 
+ * @JsonBinProcessor - A class used to interact with external api's, extract the data, and insert it into this application
+ * 
+ * @baseUrl - The base url for all api's
+ * @playersBinId - The route for players
+ * @options - Contains any keys needed to access a whitelisted api
+ * @playersBinUrl - The complete api call for the players bin
+ */
 class JsonBinProcessor {
     constructor() {
         this.baseUrl = "https://api.jsonbin.io/b/";
