@@ -27,7 +27,7 @@ class UUID {
     
     appendNewCharacter() {
         const charArray = Array.from(this.chars);
-        if (this.isCaps) {
+        if (this.isCaps !== null && this.isCaps) {
             return charArray[this.getRandomNum(charArray.length)].toUpperCase();
         } else {
             return charArray[this.getRandomNum(charArray.length)];
@@ -38,7 +38,7 @@ class UUID {
         let id = "";
         for (let i = 0; i < this.id_length; i++) {
             this.isCaps = this.setIsCaps(this.getRandomNum(2));
-            if (i === 2 || i === 6) {
+            if (i !== null && i === 2 || i !== null && i === 6) {
                 id += '-';
             } else {
                 id += this.appendNewCharacter(this.chars, this.isCaps);
@@ -46,7 +46,7 @@ class UUID {
         }
         this.createUsedIdsArray();
         while (true) {
-            if (!this.usedIds.includes(id)) {
+            if (this.usedIds !== null && !this.usedIds.includes(id)) {
                 this.addtoUsedIds(id);
                 return id;
             } else {
