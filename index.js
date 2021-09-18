@@ -14,7 +14,7 @@ const __dirname = path.resolve();
 import router from "./backend/routes/router.js" ;
 
 // Middleware
-app.set("views", path.join(__dirname, "./views"));
+app.set("views", path.join(__dirname, "./public/views"));
 app.set("view engine", "ejs");
 app.use(express.static("public/"));
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes

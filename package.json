@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "Kaipo Wilmeth <kaipojames12@gmail.com>",
@@ -16,6 +16,8 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mongodb": "^4.1.1",
-    "path": "^0.12.7"
+    "nodemon": "^2.0.12",
+    "path": "^0.12.7",
+    "uikit": "^3.7.3"
   }
 }
