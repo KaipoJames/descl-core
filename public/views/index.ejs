@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESCL Manager | Home</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+    <div class="home-container">
+        <h1 class="uk-heading-small uk-tab-bottom"><%= header %></h1>
+        <div class="container">
+            <ul uk-tab>
+                <li><a class="mongo tab-child" href="/mongo-manager">Mongo</a></li>
+                <li class="home tab-child uk-active"><a class="home" href="/">Home</a></li>
+                <li><a class="jobs tab-child" href="/jobs-manager">Jobs</a></li>
+            </ul>
+        </div>
+        <div class="select-container">
+            <label id="select-label" for="select">Action/Collection: </label>
+            <select name="select" id="select"></select>
+        </div>
+
+        <div class="container dynamic-content">
+            <div class="uk-inline">
+                <button class="uk-button uk-button-default" type="button">Route</button>
+                <div uk-dropdown="pos: bottom-justify" style="min-width: 400px">
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li class="uk-nav-header">URL:</li>
+                        <li><a href="#">https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="uk-inline">
+                <button class="uk-button uk-button-default" type="button">JSON Data</button>
+                <div uk-dropdown="pos: bottom-justify">
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li class="uk-active"><textarea readonly id="json-data" cols="50" rows="40"></textarea></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="uk-inline">
+                <button class="uk-button uk-button-default" type="button">Actions</button>
+                <div uk-dropdown="pos: bottom-justify">
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li><a href="">Trigger Job</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="../js/home.js"></script>
+</body>
+</html>
