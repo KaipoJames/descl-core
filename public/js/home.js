@@ -23,13 +23,13 @@ const collectionNames = ["Players", "Positions", "Moves", "Events", "Teams"];
 
 const setActiveEnvironment = (activeTabName) => {
     if (activeTabName === 'home') {
-        const view = new PageView(getActiveEnvrionmentsEnum().Home, ["API Links", "Photos", "Other"]);
+        const view = new PageView(getActiveEnvrionmentsEnum().Home, ["API Links", "Photos", "Other"], "Choose Action: ");
         view.displayContent();
     } else if (activeTabName === 'mongo') {
-        const view = new PageView(getActiveEnvrionmentsEnum().Mongo, collectionNames);
+        const view = new PageView(getActiveEnvrionmentsEnum().Mongo, collectionNames, "Choose Collection: ");
         view.displayContent();
     } else {
-        const view = new PageView(getActiveEnvrionmentsEnum().Jobs, collectionNames);
+        const view = new PageView(getActiveEnvrionmentsEnum().Jobs, collectionNames, "Choose API Set: ");
         view.displayContent();
     }
 }
@@ -39,7 +39,6 @@ const setActiveTabContent = () => {
         tab.addEventListener("click", () => {
             const activeTabName = tab.classList[0];
             setActiveEnvironment(activeTabName);
-            console.log(`Switching To ${activeEnvironment} Environment`);
         });
     });
 }
