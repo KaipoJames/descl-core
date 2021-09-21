@@ -12,7 +12,10 @@ export class PageView {
 
         this.APICalls = {
             players: "https://api.jsonbin.io/b/613e45124a82881d6c4daa6c/1",
-            positions: "https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d"
+            positions: "https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d",
+            moves: "https://api.jsonbin.io/b/61495b64aa02be1d444c1031",
+            teams: null,
+            events: null
         }
 
         this.jsonContainer = document.querySelector("#json-data");
@@ -138,11 +141,13 @@ export class PageView {
 
     getURL(filter) {
         if (filter === 'Players') {
-            //console.log(this.APICalls.players);
             return this.APICalls.players;
         } else if (filter === 'Positions') {
-            //console.log(this.APICalls.positions);
             return this.APICalls.positions;
+        } else if (filter === 'Moves') {
+            return this.APICalls.moves;
+        } else if (filter === 'Teams') {
+            return this.APICalls.teams;
         }
     }
 
