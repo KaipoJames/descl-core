@@ -9,12 +9,8 @@ export class PageView {
         this.selectOptionValues = optionValues;
         this.activeEnvironment = activeEnvironment.title;
         this.activeEnvColor = activeEnvironment.color;
-        this.APICalls = {
-            players: "https://api.jsonbin.io/b/613e45124a82881d6c4daa6c/1",
-            positions: "https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d",
-            moves: "https://api.jsonbin.io/b/61495b64aa02be1d444c1031",
-            teams: null,
-            events: null
+        if (this.activeEnvironment === 'jobs') {
+            this.setApiCalls();
         }
     }
 
@@ -144,6 +140,16 @@ export class PageView {
             return this.APICalls.teams;
         } else if (filter === 'Events') {
             return this.APICalls.events;
+        }
+    }
+
+    setApiCalls() {
+        this.APICalls = {
+            players: "https://api.jsonbin.io/b/613e45124a82881d6c4daa6c/1",
+            positions: "https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d",
+            moves: "https://api.jsonbin.io/b/61495b64aa02be1d444c1031",
+            teams: null,
+            events: null
         }
     }
 
