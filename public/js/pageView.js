@@ -3,35 +3,18 @@
 export class PageView {
     constructor(activeEnvironment, optionValues, selectLabel) {
         this.homeContainer = document.querySelector(".home-container");
-
         this.selectElement = document.querySelector("#select");
+        this.jsonContainer = document.querySelector("#json-data");
         this.selectLabel = selectLabel;
         this.selectOptionValues = optionValues;
         this.activeEnvironment = activeEnvironment.title;
         this.activeEnvColor = activeEnvironment.color;
-
         this.APICalls = {
             players: "https://api.jsonbin.io/b/613e45124a82881d6c4daa6c/1",
             positions: "https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d",
             moves: "https://api.jsonbin.io/b/61495b64aa02be1d444c1031",
             teams: null,
             events: null
-        }
-
-        this.jsonContainer = document.querySelector("#json-data");
-    }
-
-    updateJSON(url) {
-        // console.log("active env: " + this.activeEnvironment);
-        // if (!this.activeEnvironment === 'jobs') { this.jsonContainer.value = ""; }
-        if (this.activeEnvironment === 'jobs') { 
-            (async () => {
-                const jsonContainer = document.querySelector("#json-data");
-                jsonContainer.value = "";
-                const data = await this.getJsonData(url);
-                jsonContainer.value += JSON.stringify(data);
-                this.formatJson();
-            })();
         }
     }
 
@@ -49,6 +32,20 @@ export class PageView {
         } else if (this.activeEnvironment === 'home') {
             this.displayHomeContent();
         }
+    }
+
+    addSelectOptions() {
+        document.querySelector("#select-label").innerText = this.selectLabel;
+        this.selectElement.innerHTML = "";
+        this.selectElement.style.backgroundColor = this.activeEnvColor;
+        this.selectOptionValues.forEach(value => {
+            if (this.selectElement.childNodes.length < 5) {
+                const option = document.createElement("option");
+                option.innerHTML = value;
+                option.value = value;
+                this.selectElement.appendChild(option);
+            }
+        });
     }
 
     removeDynamicContent() {
@@ -108,7 +105,6 @@ export class PageView {
         const buttonsTexts = ["Route", "JSON Data", "Actions"];
 
         const container = this.createElement("div", null, "container dynamic-content", null, this.homeContainer);
-
         for (let i = 0; i < 3; i++) {
             const containerChild = this.createElement("div", null, "uk-inline", null, container);
             const button = this.createElement("button", buttonsTexts[i], "uk-button uk-button-default", null, containerChild);
@@ -133,9 +129,7 @@ export class PageView {
             if (i === 2) {
                 this.createElement("li", "Trigger Job", null, null, dropDown)
             }
-
         }
-
         this.updateJSON(apiCall);
     }
 
@@ -148,6 +142,8 @@ export class PageView {
             return this.APICalls.moves;
         } else if (filter === 'Teams') {
             return this.APICalls.teams;
+        } else if (filter === 'Events') {
+            return this.APICalls.events;
         }
     }
 
@@ -160,21 +156,19 @@ export class PageView {
         return element;
     }
 
-    addSelectOptions() {
-        document.querySelector("#select-label").innerText = this.selectLabel;
-        this.selectElement.innerHTML = "";
-        this.selectElement.style.backgroundColor = this.activeEnvColor;
-        this.selectOptionValues.forEach(value => {
-            if (this.selectElement.childNodes.length < 5) {
-                const option = document.createElement("option");
-                option.innerHTML = value;
-                option.value = value;
-                this.selectElement.appendChild(option);
-            }
-        });
+    updateJSON(url) {
+        if (this.activeEnvironment === 'jobs') { 
+            (async () => {
+                const jsonContainer = document.querySelector("#json-data");
+                jsonContainer.value = "";
+                const data = await this.getJsonData(url);
+                jsonContainer.value += JSON.stringify(data);
+                this.formatJson();
+            })();
+        }
     }
 
-    // Formats JSON data when populated into DOM element
+    // Formats JSON data when populated into TextArea
     formatJson() {
         if (document.querySelector('#json-data')) {
             let ugly = document.querySelector('#json-data').value;
@@ -183,7 +177,7 @@ export class PageView {
                 const pretty = JSON.stringify(stringedJSON, undefined, 4);
                 document.querySelector('#json-data').value = pretty;
             } else {
-                console.error("Unable to format textArea. The Text to be formatted is likely not valid JSON.")
+                console.error("Unable to format TextArea. The Text to be formatted is likely not valid JSON.")
             }
         }
     }
@@ -204,12 +198,12 @@ export class PageView {
      * @returns 
      */
     async getJsonData(url) {
-            const response = await fetch(url, {
-            method: 'GET', 
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                'secret-key': '$2b$10$aqOjFxyOlWLfgKef0uUsBuAP2tlm8gBhCFSv0oICyBKqrymCGiaCO'
+        const response = await fetch(url, {
+        method: 'GET', 
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'secret-key': '$2b$10$aqOjFxyOlWLfgKef0uUsBuAP2tlm8gBhCFSv0oICyBKqrymCGiaCO'
             }
         });
         return await response.json();
