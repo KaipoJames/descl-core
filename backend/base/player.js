@@ -3,7 +3,7 @@ const uuidHelper = new UUID();
 
 class Player {
     constructor(dt) {
-        this.descl_id = uuidHelper.getUniqueId();
+        this.descl_id = null;
         this.name = dt.name;
         this.nicknames = dt.nicknames;
         this.weight = dt.weight;
@@ -19,6 +19,16 @@ class Player {
         this.secondaryColor = dt.secondary_color;
         this.racingNumber = dt.racingNumber;
         this.racingCode = dt.racingCode;
+    }
+
+    assignDesclId() {
+        if (this.descl_id !== null) {
+            this.descl_id = uuidHelper.getUniqueId();
+        }
+    }
+
+    getName() {
+        return this.name;
     }
 }
 
