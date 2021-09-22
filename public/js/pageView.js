@@ -148,7 +148,7 @@ export class PageView {
             players: "https://api.jsonbin.io/b/613e45124a82881d6c4daa6c/1",
             positions: "https://api.jsonbin.io/b/61465eeaaa02be1d444ad98d",
             moves: "https://api.jsonbin.io/b/61495b64aa02be1d444c1031",
-            teams: null,
+            teams: "https://api.jsonbin.io/b/614aa69f9548541c29b65743",
             events: null
         }
     }
