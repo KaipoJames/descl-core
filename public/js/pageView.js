@@ -9,7 +9,7 @@ export class PageView {
         this.selectOptionValues = optionValues;
         this.activeEnvironment = activeEnvironment.title;
         this.activeEnvColor = activeEnvironment.color;
-        if (this.activeEnvironment === 'jobs') {
+        if (this.activeEnvironment === 'jobs' || this.activeEnvironment === 'home') {
             this.setApiCalls();
         }
     }
@@ -91,9 +91,22 @@ export class PageView {
         }
     }
 
-    displayHomeContent() {
+    async displayHomeContent() {
+        const homePageHolder = document.querySelector("#homePageHolder");
+        this.removeAllChildNodes(homePageHolder);
+        const players = await this.getJsonData(this.APICalls.players);
+        this.selectElement.addEventListener('change', () => {
+            const names = [];
+            for (const player of players) {
+                names.push(player.name);
+            }
+            this.createElement("h3", "Contestants", null, null, homePageHolder);
+            this.createListElement(names, "uk-list", null, homePageHolder);
 
+        })
     }
+
+
 
     displayJobsContent() {
         const filter = this.selectElement.value;
@@ -162,6 +175,17 @@ export class PageView {
         return element;
     }
 
+    createListElement(listItems, classlist, id, parent) {
+        const element = this.createElement("ul", null, classlist, id, parent);
+        for (const item of listItems) { this.createElement("li", item, null, null, element); }
+    }
+
+    removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
     updateJSON(url) {
         if (this.activeEnvironment === 'jobs') { 
             (async () => {
@@ -205,11 +229,11 @@ export class PageView {
      */
     async getJsonData(url) {
         const response = await fetch(url, {
-        method: 'GET', 
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            'secret-key': '$2b$10$aqOjFxyOlWLfgKef0uUsBuAP2tlm8gBhCFSv0oICyBKqrymCGiaCO'
+            method: 'GET', 
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'secret-key': '$2b$10$aqOjFxyOlWLfgKef0uUsBuAP2tlm8gBhCFSv0oICyBKqrymCGiaCO'
             }
         });
         return await response.json();

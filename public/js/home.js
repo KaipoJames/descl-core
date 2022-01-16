@@ -21,9 +21,11 @@ const getActiveEnvrionmentsEnum = () => {
 let activeEnvironment = getActiveEnvrionmentsEnum().Home.title;
 const collectionNames = ["Players", "Positions", "Moves", "Events", "Teams"];
 
+const HOME_PAGE_SELECT_OPTIONS = ["View API Links", "See All Photos", "Generate Schedule", "Other ->"];
+
 const setActiveEnvironment = (activeTabName) => {
     if (activeTabName === 'home') {
-        const view = new PageView(getActiveEnvrionmentsEnum().Home, ["API Links", "Photos", "Other"], "Choose Action: ");
+        const view = new PageView(getActiveEnvrionmentsEnum().Home, HOME_PAGE_SELECT_OPTIONS, "Choose Action: ");
         view.displayContent();
     } else if (activeTabName === 'mongo') {
         const view = new PageView(getActiveEnvrionmentsEnum().Mongo, collectionNames, "Choose Collection: ");
